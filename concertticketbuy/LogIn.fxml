@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.concertticketbuy.controller.Controller">
+   <left>
+      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #9f8e7f;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="3.0" layoutY="200.0" prefHeight="39.0" prefWidth="222.0" text="Buy tickets at the best price" textFill="#d9d7d0">
+               <font>
+                  <Font name="Verdana Bold Italic" size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="90.0" prefHeight="46.0" prefWidth="229.0" text="Ticket Master" textFill="#d9d7d0">
+               <font>
+                  <Font name="Verdana Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="332.0" style="-fx-background-color: #d9d7d0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutY="37.0" prefHeight="46.0" prefWidth="291.0" text="Log In" textFill="#a8a59a">
+               <font>
+                  <Font name="Verdana Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="113.0" prefHeight="18.0" prefWidth="74.0" text="Username:">
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="169.0" prefHeight="18.0" prefWidth="78.0" text="Password:">
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordPasswordField" layoutX="106.0" layoutY="166.0" prefHeight="23.0" prefWidth="150.0" promptText="password" />
+            <Button fx:id="loginButton" layoutX="36.0" layoutY="239.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: #9f8e7f;" text="Enter Account" textAlignment="CENTER" />
+            <Button fx:id="registerButton" layoutX="36.0" layoutY="286.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: #9f8e7f;" text="Register Now" textAlignment="CENTER" />
+            <Button fx:id="cancelButton" layoutX="36.0" layoutY="334.0" mnemonicParsing="false" onAction="#cancerButtonOnAction" prefHeight="37.0" prefWidth="218.0" style="-fx-background-color: #9f8e7f;" text="Cancel" textAlignment="CENTER" />
+            <TextField fx:id="usernameTextField" layoutX="107.0" layoutY="110.0" promptText="username" />
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutY="83.0" prefHeight="18.0" prefWidth="292.0" textFill="#ea0707" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
