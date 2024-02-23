@@ -1,0 +1,122 @@
+-- we don't know how to generate root <with-no-name> (class Root) :(
+
+comment on database postgres is 'default administrative connection database';
+
+create table users
+(
+    user_id      serial
+        primary key,
+    username     varchar(50)  not null,
+    password     varchar(50)  not null,
+    email        varchar(150) not null,
+    phone_number varchar(50)  not null,
+    user_type    integer
+        constraint users_user_type_check
+            check (user_type = ANY (ARRAY [0, 1]))
+);
+
+alter table users
+    owner to postgres;
+
+create table card_details
+(
+    user_id         integer     not null
+        references users,
+    card_number     varchar(16) not null
+        unique,
+    expiration_date date        not null,
+    cvc             varchar(3)  not null
+);
+
+alter table card_details
+    owner to postgres;
+
+create table ticket_type
+(
+    ticket_id       integer      not null
+        primary key,
+    zone_name       varchar(255) not null,
+    price_increment integer      not null
+);
+
+alter table ticket_type
+    owner to postgres;
+
+create table venues
+(
+    venue_id       integer      not null
+        primary key,
+    venue_name     varchar(255) not null,
+    address_street varchar(255) not null,
+    address_city   varchar(255) not null,
+    capacity       integer      not null
+        constraint venues_capacity_check
+            check (capacity > 0),
+    description    text,
+    contact_phone  varchar(20)  not null
+        constraint valid_phone
+            check ((length((contact_phone)::text) >= 7) AND (length((contact_phone)::text) <= 20)),
+    contact_email  varchar(255) not null
+        constraint valid_email
+            check (POSITION(('@'::text) IN (contact_email)) > 0)
+);
+
+alter table venues
+    owner to postgres;
+
+create table concerts
+(
+    concert_id   serial
+        primary key,
+    band         varchar(255) not null,
+    date         date         not null,
+    location     varchar(255) not null,
+    tickets      integer      not null
+        constraint concerts_tickets_check
+            check (tickets >= 0)
+        constraint tickets_quantity_check
+            check (tickets > 0),
+    ticket_price integer
+        constraint ticket_price_check
+            check (ticket_price >= 0),
+    venue_id     integer
+        references venues
+);
+
+alter table concerts
+    owner to postgres;
+
+create table tickets_sold
+(
+    ticket_type integer not null
+        references ticket_type,
+    user_id     integer not null
+        references users,
+    concert_id  integer not null
+        references concerts,
+    price       integer not null,
+    nb_tickets  integer,
+    primary key (ticket_type, user_id, concert_id)
+);
+
+alter table tickets_sold
+    owner to postgres;
+
+create table band_info
+(
+    band_id             serial
+        primary key,
+    concert_id          integer
+        unique
+        references concerts,
+    number_of_albums    integer      not null,
+    copies_sold         integer      not null,
+    most_streamed_songs varchar(255) not null,
+    details             varchar(255)
+);
+
+alter table band_info
+    owner to postgres;
+
+INSERT INTO users(username, password, email, phone_number, user_type) VALUES('admin', '1234', 'admin@default.com', '0000000000', '0')
+
