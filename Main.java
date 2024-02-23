@@ -1,5 +1,3 @@
-//Dragoi Ioan-Cosmin
-//Group: 2
 package com.example.concertticketbuy;
 
 import javafx.application.Application;
